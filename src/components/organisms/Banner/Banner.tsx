@@ -77,6 +77,11 @@ export default function Banner() {
                     <Container mt={'20px'}>
                         <HStack justifyContent={'space-between'} flex={1} w={'100%'} px={'50px'}>
                             <Image
+                                style={{
+                                    padding: colorMode === 'dark' ? '10px' : 0,
+                                    borderRadius: 6,
+                                    background: colorMode === 'dark' ? '#fff' : 'transparent',
+                                }}
                                 width={60}
                                 height={60}
                                 objectFit="contain"
@@ -86,6 +91,11 @@ export default function Banner() {
                                 alt="Hình ảnh"
                             />
                             <Image
+                                style={{
+                                    padding: colorMode === 'dark' ? '10px' : 0,
+                                    borderRadius: 6,
+                                    background: colorMode === 'dark' ? '#fff' : 'transparent',
+                                }}
                                 width={60}
                                 height={60}
                                 objectFit="contain"
@@ -95,6 +105,11 @@ export default function Banner() {
                                 alt="Hình ảnh"
                             />
                             <Image
+                                style={{
+                                    padding: colorMode === 'dark' ? '10px' : 0,
+                                    borderRadius: 6,
+                                    background: colorMode === 'dark' ? '#fff' : 'transparent',
+                                }}
                                 width={60}
                                 height={60}
                                 objectFit="contain"
@@ -104,6 +119,11 @@ export default function Banner() {
                                 alt="Hình ảnh"
                             />
                             <Image
+                                style={{
+                                    padding: colorMode === 'dark' ? '10px' : 0,
+                                    borderRadius: 6,
+                                    background: colorMode === 'dark' ? '#fff' : 'transparent',
+                                }}
                                 width={60}
                                 height={60}
                                 objectFit="contain"
@@ -113,6 +133,11 @@ export default function Banner() {
                                 alt="Hình ảnh"
                             />
                             <Image
+                                style={{
+                                    padding: colorMode === 'dark' ? '10px' : 0,
+                                    borderRadius: 6,
+                                    background: colorMode === 'dark' ? '#fff' : 'transparent',
+                                }}
                                 width={60}
                                 height={60}
                                 objectFit="contain"
@@ -122,6 +147,11 @@ export default function Banner() {
                                 alt="Hình ảnh"
                             />
                             <Image
+                                style={{
+                                    padding: colorMode === 'dark' ? '10px' : 0,
+                                    borderRadius: 6,
+                                    background: colorMode === 'dark' ? '#fff' : 'transparent',
+                                }}
                                 width={60}
                                 height={60}
                                 objectFit="contain"

@@ -36,7 +36,7 @@ const Header = () => {
             top={0}
             left={0}
             right={0}
-            zIndex={9999}
+            zIndex={998}
             py={4}
             px={8}
             boxShadow={isTransparent ? 'inherit' : 'sm'}
