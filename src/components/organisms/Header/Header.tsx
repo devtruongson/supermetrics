@@ -1,11 +1,14 @@
 'use client';
 
+import Cate from '@/components/atoms/Cate/Cate';
 import { useColorMode } from '@/components/ui/color-mode';
 import { Tooltip } from '@/components/ui/tooltip';
-import { Box, Button, Container, Flex, Icon, Link, Spacer, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Icon, Spacer, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { CiLight } from 'react-icons/ci';
 import { MdDarkMode } from 'react-icons/md';
+import Cart from '../Cart/Cart';
+import Search from '../Search/Search';
 
 const Header = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -44,70 +47,25 @@ const Header = () => {
         >
             <Container>
                 <Flex align="center" mx="auto">
-                    {/* Logo */}
-                    <Text fontSize="xl" fontWeight="bold" color="blue.600">
-                        Supermetrics
-                    </Text>
-
-                    <Spacer />
-
-                    {/* Navigation Links */}
-                    <Flex as="nav" align="center" gap={6} display={{ base: 'none', md: 'flex' }}>
-                        <Link
-                            href="#"
-                            fontSize="sm"
-                            fontWeight="medium"
-                            _hover={{ textDecoration: 'none', color: 'blue.500' }}
+                    <Flex as="nav" align="center" gap={6} display={{ base: 'none', md: 'flex' }} alignItems={'center'}>
+                        <Text
+                            fontSize="xl"
+                            fontWeight="bold"
+                            color="blue.600"
+                            onClick={() => (window.location.href = '/')}
+                            cursor={'pointer'}
                         >
-                            Platform
-                        </Link>
-                        <Link
-                            href="#"
-                            fontSize="sm"
-                            fontWeight="medium"
-                            _hover={{ textDecoration: 'none', color: 'blue.500' }}
-                        >
-                            Solutions
-                        </Link>
-                        <Link
-                            href="#"
-                            fontSize="sm"
-                            fontWeight="medium"
-                            _hover={{ textDecoration: 'none', color: 'blue.500' }}
-                        >
-                            Pricing
-                        </Link>
-                        <Link
-                            href="#"
-                            fontSize="sm"
-                            fontWeight="medium"
-                            _hover={{ textDecoration: 'none', color: 'blue.500' }}
-                        >
-                            Resources
-                        </Link>
-                        <Link
-                            href="#"
-                            fontSize="sm"
-                            fontWeight="medium"
-                            _hover={{ textDecoration: 'none', color: 'blue.500' }}
-                        >
-                            Company
-                        </Link>
+                            Template 2T Data
+                        </Text>
+                        <Cate />
                     </Flex>
 
                     <Spacer />
 
                     {/* Action Buttons */}
                     <Flex align="center" gap={4}>
-                        <Button variant="ghost" fontSize="sm" fontWeight="medium">
-                            Login
-                        </Button>
-                        <Button colorScheme="blue" fontSize="sm" fontWeight="medium">
-                            Book demo
-                        </Button>
-                        <Button variant="outline" colorScheme="blue" fontSize="sm" fontWeight="medium">
-                            Start free trial
-                        </Button>
+                        <Search />
+                        <Cart />
                         <Icon fontSize={'20px'} width={10}>
                             {colorMode === 'dark' ? (
                                 <Tooltip content="Chủ đề sáng" openDelay={0} closeDelay={0}>
