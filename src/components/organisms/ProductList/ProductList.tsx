@@ -28,10 +28,6 @@ export default function ProductList() {
         _fetch();
     }, []);
 
-    const handleAddToCart = (productId: number) => {
-        console.log('Thêm sản phẩm ID:', productId);
-    };
-
     return (
         <Box py={'50px'}>
             <Container>
@@ -57,7 +53,7 @@ export default function ProductList() {
                                 'http://127.0.0.1:9002',
                                 process.env.NEXT_PUBLIC_URL_BE as string,
                             )}
-                            onAddToCart={() => handleAddToCart(product.id)}
+                            document={product}
                         />
                     ))}
                 </SimpleGrid>

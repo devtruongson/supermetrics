@@ -2,6 +2,7 @@
 
 import ProductList from '@/components/organisms/ProductList/ProductList';
 import { useColorMode } from '@/components/ui/color-mode';
+import { useAppStore } from '@/stores/appStore';
 import { Document } from '@/utils/interface';
 import { Box, Button, Container, Flex, Heading, HStack, Image, Stack, Text } from '@chakra-ui/react';
 import Slider from 'react-slick';
@@ -48,6 +49,7 @@ export default function ProductDetail({ data }: { data: Document }) {
     };
 
     const { colorMode } = useColorMode();
+    const { handleAddToCart, handleToggleOpenCart } = useAppStore();
 
     return (
         <Box px={[4, 8]} bg={colorMode === 'dark' ? '#000' : '#fff'} pt={'120px'}>
@@ -97,7 +99,16 @@ export default function ProductDetail({ data }: { data: Document }) {
                                     65.000 đ
                                 </Text>
                             </Flex>
-                            <Button colorScheme="blue" size="2xl" borderRadius={'20px'} mb={'20px'}>
+                            <Button
+                                colorScheme="blue"
+                                size="2xl"
+                                borderRadius={'20px'}
+                                mb={'20px'}
+                                onClick={() => {
+                                    handleAddToCart(data);
+                                    handleToggleOpenCart();
+                                }}
+                            >
                                 Thêm vào giỏ hàng
                             </Button>
 

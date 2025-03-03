@@ -25,7 +25,7 @@ export default function Cate() {
         <Box position={'relative'}>
             <MenuRoot>
                 <MenuTrigger asChild>
-                    <Text fontSize="sm" fontWeight="600">
+                    <Text fontSize="sm" fontWeight="600" cursor={'pointer'}>
                         Danh mục
                     </Text>
                 </MenuTrigger>

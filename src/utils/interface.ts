@@ -9,6 +9,12 @@ export interface IAppState {
         document: Document;
         quantity: number;
     } | null;
+    cart_open: boolean;
+    handleAddToCart: (product: Document) => void;
+    handleRemoveProduct: (documentId: number) => void;
+    handleIncrement: (documentId: number) => void;
+    handleDecrement: (documentId: number) => void;
+    handleToggleOpenCart: () => void;
 }
 
 export interface IUser {
@@ -21,7 +27,6 @@ export interface IUser {
 
 export interface ICart {
     document: Document;
-    documentId: number;
     quantity: number;
 }
 

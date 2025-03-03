@@ -2,6 +2,8 @@
 
 import FadeInUpBox from '@/components/atoms/Animations/FadeInUp/FadeInUp';
 import { useColorMode } from '@/components/ui/color-mode';
+import { useAppStore } from '@/stores/appStore';
+import { Document } from '@/utils/interface';
 import { Badge, Box, Button, Flex, HStack, Icon, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { IoLogoYoutube } from 'react-icons/io'; // Icon YouTube
@@ -13,21 +15,19 @@ interface ProductItemProps {
     newPrice?: number;
     imageUrl: string;
     desc: string;
-    onAddToCart?: () => void;
     id: number;
+    document: Document;
 }
 
-export function ProductItem({ label, name, oldPrice, newPrice, imageUrl, onAddToCart, desc, id }: ProductItemProps) {
+export function ProductItem({ label, name, oldPrice, newPrice, imageUrl, desc, id, document }: ProductItemProps) {
     const { colorMode } = useColorMode();
     const history = useRouter();
+    const { handleAddToCart, handleToggleOpenCart } = useAppStore();
 
     return (
         <FadeInUpBox duration={0.3} ease={'easeOut'}>
             <Box
                 cursor={'pointer'}
-                onClick={() => {
-                    history.push(`/product/${id}`);
-                }}
                 borderWidth="1px"
                 borderRadius="md"
                 overflow="hidden"
@@ -51,6 +51,9 @@ export function ProductItem({ label, name, oldPrice, newPrice, imageUrl, onAddTo
                         </Badge>
                     )}
                     <Image
+                        onClick={() => {
+                            history.push(`/product/${id}`);
+                        }}
                         minH={'250px'}
                         maxH={'250px'}
                         src={imageUrl}
@@ -64,10 +67,17 @@ export function ProductItem({ label, name, oldPrice, newPrice, imageUrl, onAddTo
                     </Box>
                 </Box>
                 <Box p={4}>
-                    <Text lineClamp={1} fontWeight="semibold" mb={2}>
+                    <Text
+                        lineClamp={1}
+                        fontWeight="semibold"
+                        mb={2}
+                        onClick={() => {
+                            history.push(`/product/${id}`);
+                        }}
+                    >
                         {name}
                     </Text>
-                    <Text lineClamp={2} fontWeight="400" fontSize={'sm'} color={'#666'} mb={2}>
+                    <Text lineClamp={1} fontWeight="400" fontSize={'sm'} color={'#666'} mb={2}>
                         {desc}
                     </Text>
                     <Flex align="center" mt={2} gap={2}>
@@ -83,7 +93,17 @@ export function ProductItem({ label, name, oldPrice, newPrice, imageUrl, onAddTo
                         )}
                     </Flex>
                     <HStack>
-                        <Button mt={4} py={5} w={'100%'} colorScheme="blue" size="sm" onClick={onAddToCart}>
+                        <Button
+                            mt={4}
+                            py={5}
+                            w={'100%'}
+                            colorScheme="blue"
+                            size="sm"
+                            onClick={() => {
+                                handleAddToCart(document);
+                                handleToggleOpenCart();
+                            }}
+                        >
                             Thêm vào giỏ hàng
                         </Button>
                     </HStack>

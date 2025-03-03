@@ -2,12 +2,24 @@
 
 import { CartIcon, CloseIcon } from '@/components/atoms/Icons/Icons';
 import { useColorMode } from '@/components/ui/color-mode';
-import { Box, Button, Flex, Heading, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import getTotalPrice from '@/helpers/totalPrice';
+import { useAppStore } from '@/stores/appStore';
+import { ICart } from '@/utils/interface';
+import { Badge, Box, Button, EmptyState, Flex, Heading, HStack, Icon, Image, Text, VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { LuShoppingCart } from 'react-icons/lu';
 
 export default function Cart() {
     const [open, setOpen] = useState<boolean>(false);
     const { colorMode } = useColorMode();
+
+    const { cart_open, cart } = useAppStore();
+
+    useEffect(() => {
+        if (cart_open) {
+            setOpen(cart_open);
+        }
+    }, [cart_open]);
 
     return (
         <Box>
@@ -73,7 +85,23 @@ export default function Cart() {
                             </Icon>
                         </Button>
                         <VStack flex={1} align="stretch" overflow={'auto'}>
-                            <CartItem />
+                            {cart.length > 0 ? (
+                                cart.map((item, index) => <CartItem itemCart={item} key={index} />)
+                            ) : (
+                                <EmptyState.Root>
+                                    <EmptyState.Content>
+                                        <EmptyState.Indicator>
+                                            <LuShoppingCart />
+                                        </EmptyState.Indicator>
+                                        <VStack textAlign="center">
+                                            <EmptyState.Title>Giỏ hàng của bạn trống</EmptyState.Title>
+                                            <EmptyState.Description>
+                                                Hãy mua thêm sản phẩm tại trang chủ
+                                            </EmptyState.Description>
+                                        </VStack>
+                                    </EmptyState.Content>
+                                </EmptyState.Root>
+                            )}
                         </VStack>
                         <Box>
                             <Box py={'10px'}>
@@ -82,7 +110,7 @@ export default function Cart() {
                             <Flex justify="space-between" align="center">
                                 <Text fontWeight="medium">Tổng số phụ:</Text>
                                 <Text fontWeight="bold" fontSize="lg">
-                                    65.000 đ
+                                    {getTotalPrice(cart).toLocaleString()} đ
                                 </Text>
                             </Flex>
                             <Button colorScheme="blue" w="full" mt={4}>
@@ -92,35 +120,40 @@ export default function Cart() {
                     </Box>
                 </Box>
             </Box>
-            <Box onClick={() => setOpen(true)} cursor="pointer">
+            <Box onClick={() => setOpen(true)} cursor="pointer" position={'relative'}>
                 <Icon fontSize="20px" width={10}>
                     <CartIcon />
                 </Icon>
+                {cart.length > 0 && (
+                    <Badge
+                        position="absolute"
+                        top="-3"
+                        right="-4"
+                        borderRadius="full"
+                        bg="red.500"
+                        color="white"
+                        fontSize="0.8em"
+                        px={2}
+                        py={1}
+                    >
+                        {cart.length}
+                    </Badge>
+                )}
             </Box>
         </Box>
     );
 }
 
-const CartItem = () => {
-    const [quantity, setQuantity] = useState(1);
-
-    const handleIncrease = () => {
-        setQuantity((prev) => prev + 1);
-    };
-
-    const handleDecrease = () => {
-        setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-    };
-
-    const handleRemove = () => {
-        // Xử lý xóa sản phẩm khỏi giỏ hàng tại đây
-        console.log('Xóa sản phẩm khỏi giỏ hàng');
-    };
+const CartItem = ({ itemCart }: { itemCart: ICart }) => {
+    const { handleDecrement, handleIncrement, handleRemoveProduct } = useAppStore();
 
     return (
         <Flex gap={4} my={1} align="center">
             <Image
-                src="https://optimatevn.com/wp-content/uploads/2024/12/SP.png"
+                src={itemCart.document?.images[0]?.image_url?.replace(
+                    'http://127.0.0.1:9002',
+                    process.env.NEXT_PUBLIC_URL_BE as string,
+                )}
                 alt="Học từ vựng & mọi thứ"
                 width="80px"
                 height="80px"
@@ -129,23 +162,23 @@ const CartItem = () => {
             />
             <Box flex="1">
                 <Text fontWeight="semibold" mb={1}>
-                    Học từ vựng & mọi thứ với Spaced Repetition - Google Sheets Template
+                    {itemCart.document.title}
                 </Text>
                 <Flex align="baseline" gap={2}>
-                    <Text fontSize="sm" textDecoration="line-through" color="gray.500">
-                        200.000 đ
+                    <Text fontSize="sm" textDecoration="line-through" fontWeight={600} color="gray.500">
+                        {((itemCart.document.price / 0.8) * itemCart.quantity).toLocaleString()} đ
                     </Text>
                     <Text fontWeight="bold" color="red.500">
-                        65.000 đ
+                        {(itemCart.document.price * itemCart.quantity).toLocaleString()} đ
                     </Text>
                 </Flex>
                 <Flex mt={2} align="center" justify="space-between">
                     <HStack>
-                        <Button onClick={handleDecrease}>Giảm</Button>
-                        <Text>{quantity}</Text>
-                        <Button onClick={handleIncrease}>Tăng</Button>
+                        <Button onClick={() => handleDecrement(itemCart.document.id)}>Giảm</Button>
+                        <Text>{itemCart.quantity}</Text>
+                        <Button onClick={() => handleIncrement(itemCart.document.id)}>Tăng</Button>
                     </HStack>
-                    <Button onClick={handleRemove}>Xóa</Button>
+                    <Button onClick={() => handleRemoveProduct(itemCart.document.id)}>Xóa</Button>
                 </Flex>
             </Box>
         </Flex>
