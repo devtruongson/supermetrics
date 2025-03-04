@@ -5,9 +5,17 @@ import { Document } from '@/utils/interface';
 import { Box, Container, EmptyState, Heading, VStack } from '@chakra-ui/react';
 import { HiColorSwatch } from 'react-icons/hi';
 
-export default function Cate({ data, isShowEmpty }: { data: Document[]; isShowEmpty?: boolean }) {
+export default function Cate({
+    data,
+    isShowEmpty,
+    padding,
+}: {
+    data: Document[];
+    isShowEmpty?: boolean;
+    padding?: string;
+}) {
     return (
-        <Box py={'120px'}>
+        <Box py={padding ? padding : '120px'}>
             <Container>
                 {data && data.length > 0 ? (
                     <>

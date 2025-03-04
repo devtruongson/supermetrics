@@ -60,8 +60,6 @@ export default function ProductDetail({ data }: { data: Document }) {
           }[]
     >([]);
 
-    console.log(data);
-
     useEffect(() => {
         if (!data) return;
 
@@ -71,7 +69,7 @@ export default function ProductDetail({ data }: { data: Document }) {
                 dataCate?.data?.map(async (cate) => {
                     if (parseInt(cate.id) !== data.category_id) {
                         const res = await getAllPoductCateService(parseInt(cate.id));
-                        if (res.success) {
+                        if (res.success && res.data.length > 0) {
                             const dataBuilder = {
                                 title: res?.data[0]?.category_name ? res?.data[0].category_name : 'Đang cập nhật',
                                 data: res.data,
@@ -158,7 +156,7 @@ export default function ProductDetail({ data }: { data: Document }) {
             )}
             {productList &&
                 productList.length > 0 &&
-                productList.map((item, index) => <Cate isShowEmpty={true} data={item.data} key={index} />)}
+                productList.map((item, index) => <Cate padding='30px' isShowEmpty={true} data={item.data} key={index} />)}
         </Box>
     );
 }

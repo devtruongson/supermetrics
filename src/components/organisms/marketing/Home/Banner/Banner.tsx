@@ -5,9 +5,11 @@ import { useColorMode } from '@/components/ui/color-mode';
 import { Box, Button, Container, Heading, Image } from '@chakra-ui/react';
 
 import { Badge, Flex, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 export default function Banner() {
     const { colorMode } = useColorMode();
+    const history = useRouter();
 
     return (
         <Box pt={'94px'}>
@@ -40,7 +42,7 @@ export default function Banner() {
                                 <Text fontSize="md" mb={4}>
                                     Chiến dịch 31/03/2025 - Code: <strong>OPTIMATE</strong>
                                 </Text>
-                                <Button colorScheme="teal" size="lg">
+                                <Button colorScheme="teal" size="lg" onClick={() => history.push('/product')}>
                                     Mua ngay
                                 </Button>
                             </Box>

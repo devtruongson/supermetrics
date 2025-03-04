@@ -50,7 +50,7 @@ const timeReceive = createListCollection({
 export default function CheckoutPage() {
     const [qr, setQr] = useState<string>('');
     const [typeCheckoutSelect, setTypeCheckOutSelect] = useState('BANKING');
-    const { cart } = useAppStore();
+    const { cart, handleClearCart } = useAppStore();
     const [formData, setFormData] = useState({
         customerName: '',
         customerEmail: '',
@@ -172,7 +172,8 @@ export default function CheckoutPage() {
                     text: 'Chúc mừng bạn đã đặt hàng thành công!',
                     icon: 'success',
                 });
-                // window.location.href = `/order/`;
+                handleClearCart();
+                window.location.href = `/order/${formData.customerPhone}`;
             } else {
                 Swal.fire({
                     text: 'Có lỗi khi tạo đơn hàng',

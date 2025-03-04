@@ -105,6 +105,14 @@ export const useAppStore = create<IAppState>()(
                     };
                 });
             },
+            handleClearCart() {
+                set((state) => {
+                    return {
+                        ...state,
+                        cart: [],
+                    };
+                });
+            },
         }),
         {
             name: 'app_data',
