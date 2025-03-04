@@ -22,6 +22,8 @@ export default function Banner() {
                 display={'flex'}
                 justifyContent={'center'}
                 alignItems={'center'}
+                maxW={'100%'}
+                overflow={'auto'}
             >
                 Giảm ngay 10% khi đơn hàng có giá trị hơn 160k | Chỉ đến ngày 31/03/2025
             </Button>
