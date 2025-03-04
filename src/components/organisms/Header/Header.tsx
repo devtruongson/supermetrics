@@ -45,12 +45,12 @@ const Header = () => {
                             </Box>
                         </Flex>
                         <Cate />
-                        <List.Root display="flex" flexDirection="row" listStyle="none" gap={4}>
+                        <List.Root display="flex" flexDirection="row" listStyle="none" gap={4} padding={0}>
                             <List.Item fontSize="sm" fontWeight={600}>
-                                <Link href="https://khoinghiepkinhdoanh.info/">Khởi nghiệp kinh doanh</Link>
+                                <Link href="/order/enter_your_phone">Tra cứu đơn hàng</Link>
                             </List.Item>
                             <List.Item fontSize="sm" fontWeight={600}>
-                                <Link href="https://hcw.com.vn/services/">Hướng dẫn kiến thức</Link>
+                                <Link href="https://khoinghiepkinhdoanh.info/">Khởi nghiệp kinh doanh</Link>
                             </List.Item>
                             <List.Item fontSize="sm" fontWeight={600}>
                                 <Link href="https://www.hcwvn.com/">Liên hệ</Link>
