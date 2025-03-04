@@ -397,7 +397,17 @@ export default function CheckoutPage() {
                                 <Box py={'6px'} gap={2}>
                                     <FormControl isRequired w={'100%'}>
                                         <FormLabel>Địa chỉ nhận hàng</FormLabel>
-                                        <Textarea placeholder="Nhập địa chỉ nhận hàng" minHeight={'150px'} />
+                                        <Textarea
+                                            value={formData.address}
+                                            onChange={(e) =>
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    address: e.target.value,
+                                                }))
+                                            }
+                                            placeholder="Nhập địa chỉ nhận hàng"
+                                            minHeight={'150px'}
+                                        />
                                     </FormControl>
                                     <List.Root gap="1" variant="plain" align="center">
                                         <List.Item>

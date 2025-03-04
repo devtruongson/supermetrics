@@ -124,8 +124,8 @@ const MenuMobile = () => {
             <DrawerBackdrop />
             <DrawerTrigger asChild>
                 <Button
-                    width={'24px'}
-                    height={'24px'}
+                    width={'30px'}
+                    height={'30px'}
                     variant="outline"
                     size="sm"
                     bg={colorMode === 'dark' ? '#fff' : 'transparent'}
