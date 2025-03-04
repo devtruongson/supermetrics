@@ -3,7 +3,29 @@
 import Cate from '@/components/atoms/Cate/Cate';
 import { useColorMode } from '@/components/ui/color-mode';
 import { Tooltip } from '@/components/ui/tooltip';
-import { Box, Container, Flex, Heading, Icon, Image, Link, List, Spacer, Text } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Container,
+    DrawerActionTrigger,
+    DrawerBackdrop,
+    DrawerBody,
+    DrawerCloseTrigger,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerRoot,
+    DrawerTitle,
+    DrawerTrigger,
+    Flex,
+    Heading,
+    Icon,
+    Image,
+    Link,
+    List,
+    Spacer,
+    Text,
+} from '@chakra-ui/react';
 import { CiLight } from 'react-icons/ci';
 import { MdDarkMode } from 'react-icons/md';
 import Cart from '../Cart/Cart';
@@ -23,13 +45,21 @@ const Header = () => {
             zIndex={998}
             py={4}
             px={8}
+            display={'flex'}
+            justifyContent={'space-between'}
+            alignItems={'center'}
             boxShadow={'0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);'}
             bg={colorMode === 'dark' ? '#000' : '#fff'}
         >
-            <Container>
-                <Flex align="center" mx="auto">
+            <Container className="sm-p-0">
+                <Flex align="center" mx="auto" className="space_bettween_sm">
                     <Flex as="nav" align="center" gap={6} display={{ base: 'none', md: 'flex' }} alignItems={'center'}>
-                        <Flex gap={2} cursor={'pointer'} onClick={() => (window.location.href = '/')}>
+                        <Flex
+                            gap={2}
+                            cursor={'pointer'}
+                            onClick={() => (window.location.href = '/')}
+                            className="sm-hidden"
+                        >
                             <Image
                                 w={'60px'}
                                 height={'60px'}
@@ -57,8 +87,11 @@ const Header = () => {
                             </List.Item>
                         </List.Root>
                     </Flex>
+                    <Box className="pc-hidden">
+                        <MenuMobile />
+                    </Box>
 
-                    <Spacer />
+                    <Spacer className="sm-hidden" />
 
                     <Flex align="center" gap={4}>
                         <Search />
@@ -82,3 +115,61 @@ const Header = () => {
 };
 
 export default Header;
+
+const MenuMobile = () => {
+    const { colorMode } = useColorMode();
+
+    return (
+        <DrawerRoot size={'xl'}>
+            <DrawerBackdrop />
+            <DrawerTrigger asChild>
+                <Button variant="outline" size="sm" bg={colorMode === 'dark' ? '#fff' : 'transparent'}>
+                    <Image src="/hamburger.png" w={'30px'} h={'30px'} alt="Hinh Anh" />
+                </Button>
+            </DrawerTrigger>
+            <DrawerContent position={'fixed'} left={0} top={0} bottom={0} height={'100vh'}>
+                <DrawerHeader>
+                    <DrawerTitle>
+                        <Flex gap={2} cursor={'pointer'} onClick={() => (window.location.href = '/')}>
+                            <Image
+                                w={'60px'}
+                                height={'60px'}
+                                borderRadius={6}
+                                src="/marketing/logo.png"
+                                alt="Logo website"
+                            />
+                            <Box>
+                                <Heading>2T Data</Heading>
+                                <Text color={'#6ec1e4'} fontWeight={'600'} fontStyle={'italic'}>
+                                    Fast Secure Effective
+                                </Text>
+                            </Box>
+                        </Flex>
+                    </DrawerTitle>
+                </DrawerHeader>
+                <DrawerBody>
+                    <>
+                        <Cate is_mobile />
+                        <List.Root listStyle="none" gap={4} padding={0}>
+                            <List.Item fontSize="sm" fontWeight={600}>
+                                <Link href="/order/enter_your_phone">Tra cứu đơn hàng</Link>
+                            </List.Item>
+                            <List.Item fontSize="sm" fontWeight={600}>
+                                <Link href="https://khoinghiepkinhdoanh.info/">Khởi nghiệp kinh doanh</Link>
+                            </List.Item>
+                            <List.Item fontSize="sm" fontWeight={600}>
+                                <Link href="https://www.hcwvn.com/">Liên hệ</Link>
+                            </List.Item>
+                        </List.Root>
+                    </>
+                </DrawerBody>
+                <DrawerFooter>
+                    <DrawerActionTrigger asChild>
+                        <Button variant="outline">Đóng</Button>
+                    </DrawerActionTrigger>
+                </DrawerFooter>
+                <DrawerCloseTrigger />
+            </DrawerContent>
+        </DrawerRoot>
+    );
+};

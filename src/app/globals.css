@@ -24,3 +24,63 @@ html {
         }
     }
 }
+
+.pc-hidden {
+    display: none !important;
+}
+
+@media (max-width: 575.98px) {
+    .slick-list {
+        height: 300px !important;
+    }
+
+    .sm-p-0 {
+        padding: 0 !important;
+    }
+
+    .space_bettween_sm {
+        justify-content: space-between !important;
+    }
+
+    .h-300 {
+        height: 280px !important;
+    }
+
+    .pc-hidden {
+        display: block !important;
+    }
+
+    .sm-hidden {
+        display: none !important;
+    }
+
+    .full-sm {
+        width: 100% !important;
+    }
+
+    .text-20 {
+        font-size  : 24px !important;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .text-3xl-res {
+        font-size  : 28px !important;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .slick-thumb {
+        display : flex !important;
+        gap     : 20px !important;
+        position: static !important;
+
+        li {
+            width      : 40px !important;
+            height     : 40px !important;
+            display    : block !important;
+            border     : 1px solid #ccc !important;
+            flex-shrink: 0 !important;
+        }
+    }
+}

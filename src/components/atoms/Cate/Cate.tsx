@@ -5,7 +5,7 @@ import { Category } from '@/utils/interface';
 import { Box, Link, MenuContent, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-export default function Cate() {
+export default function Cate({ is_mobile }: { is_mobile?: boolean }) {
     const [cate, setCate] = useState<Category[]>([]);
     const { colorMode } = useColorMode();
 
@@ -23,13 +23,17 @@ export default function Cate() {
 
     return (
         <Box position={'relative'}>
-            <MenuRoot>
+            <MenuRoot open={is_mobile}>
                 <MenuTrigger asChild>
                     <Text fontSize="sm" fontWeight="600" cursor={'pointer'}>
                         Danh mục tài liệu
                     </Text>
                 </MenuTrigger>
-                <MenuContent bg={colorMode === 'dark' ? '#111' : '#fff'} position={'absolute'}>
+                <MenuContent
+                    shadow={is_mobile ? 'none' : 'md'}
+                    bg={colorMode === 'dark' ? '#111' : '#fff'}
+                    position={is_mobile ? 'static' : 'absolute'}
+                >
                     {cate.map((cate, index) => (
                         <MenuItem
                             _hover={{
@@ -50,6 +54,7 @@ export default function Cate() {
                                 whiteSpace={'nowrap'}
                                 outline={'none'}
                                 href={`/cate/${cate.id}`}
+                                fontWeight={600}
                             >
                                 {cate.name}
                             </Link>

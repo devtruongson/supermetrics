@@ -23,6 +23,7 @@ import {
     SelectTrigger,
     SelectValueText,
     Separator,
+    Stack,
     Text,
     Textarea,
     VStack,
@@ -324,8 +325,9 @@ export default function CheckoutPage() {
                             </SelectContent>
                         </SelectRoot>
                         {qr && typeCheckoutSelect === 'BANKING' && cart.length > 0 && (
-                            <Flex py={'6px'}>
+                            <Stack direction={['column', 'row']} py={'6px'}>
                                 <Image
+                                    className="full-sm"
                                     src={qr}
                                     alt="Hình ảnh chuyển khoản"
                                     w={'200px'}
@@ -362,7 +364,7 @@ export default function CheckoutPage() {
                                         </List.Item>
                                     </List.Root>
                                 </Box>
-                            </Flex>
+                            </Stack>
                         )}
                         {typeCheckoutSelect === 'COD' && cart.length > 0 && (
                             <>

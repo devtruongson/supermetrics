@@ -33,7 +33,7 @@ export default function Banner() {
                                 <Badge colorScheme="teal" fontSize="0.8em" mb={2}>
                                     YOUR TEMPLATE
                                 </Badge>
-                                <Heading as="h1" size="6xl" mb={4}>
+                                <Heading as="h1" size="6xl" mb={4} className="text-3xl-res">
                                     Tối ưu hóa cuộc sống của bạn với template thông minh
                                 </Heading>
                                 <Text fontSize="md" mb={1}>

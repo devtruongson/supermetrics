@@ -45,6 +45,7 @@ export default function OrderPage({ data, phone }: { data: Order[]; phone: strin
                             colorScheme="blue"
                             width={'100%'}
                             mt={6}
+                            mb={4}
                             size="lg"
                             onClick={() => {
                                 history.push(`/order/${phoneQuery.trim()}`);
@@ -114,53 +115,58 @@ export default function OrderPage({ data, phone }: { data: Order[]; phone: strin
                                     <Heading as="h3" size="sm" mb={2}>
                                         Danh sách sản phẩm
                                     </Heading>
-                                    <Table.Root>
-                                        <Table.Header>
-                                            <Table.Row>
-                                                <Table.ColumnHeader>STT</Table.ColumnHeader>
-                                                <Table.ColumnHeader>Tên sản phẩm</Table.ColumnHeader>
-                                                <Table.ColumnHeader>Số lượng</Table.ColumnHeader>
-                                                <Table.ColumnHeader>Đơn giá</Table.ColumnHeader>
-                                                <Table.ColumnHeader>Thành tiền</Table.ColumnHeader>
-                                            </Table.Row>
-                                        </Table.Header>
-                                        <Table.Body>
-                                            {order.items.map((item, index) => {
-                                                const product = item.document;
-                                                console.log(item);
-                                                return (
-                                                    <Table.Row key={index}>
-                                                        <Table.Cell>{index + 1}</Table.Cell>
-                                                        <Table.Cell>
-                                                            {product ? product.title : 'Không có sản phẩm'}
-                                                        </Table.Cell>
-                                                        <Table.Cell>{item.quantity ?? 0}</Table.Cell>
-                                                        <Table.Cell>
-                                                            {item.price ? item.price.toLocaleString() + ' đ' : 'N/A'}
-                                                        </Table.Cell>
-                                                        <Table.Cell>
-                                                            {item.price && item.quantity
-                                                                ? (item.price * item.quantity).toLocaleString() + ' đ'
-                                                                : 'N/A'}
-                                                        </Table.Cell>
-                                                    </Table.Row>
-                                                );
-                                            })}
-                                        </Table.Body>
-                                        <Table.Footer>
-                                            <Table.Row>
-                                                <Table.Cell
-                                                    colSpan={4}
-                                                    style={{ textAlign: 'right', fontWeight: 'bold' }}
-                                                >
-                                                    Tổng cộng
-                                                </Table.Cell>
-                                                <Table.Cell>
-                                                    {order.total ? order.total.toLocaleString() + ' đ' : 'N/A'}
-                                                </Table.Cell>
-                                            </Table.Row>
-                                        </Table.Footer>
-                                    </Table.Root>
+                                    <Box width={'100%'} overflow={'auto'}>
+                                        <Table.Root>
+                                            <Table.Header>
+                                                <Table.Row>
+                                                    <Table.ColumnHeader>STT</Table.ColumnHeader>
+                                                    <Table.ColumnHeader>Tên sản phẩm</Table.ColumnHeader>
+                                                    <Table.ColumnHeader>Số lượng</Table.ColumnHeader>
+                                                    <Table.ColumnHeader>Đơn giá</Table.ColumnHeader>
+                                                    <Table.ColumnHeader>Thành tiền</Table.ColumnHeader>
+                                                </Table.Row>
+                                            </Table.Header>
+                                            <Table.Body>
+                                                {order.items.map((item, index) => {
+                                                    const product = item.document;
+                                                    console.log(item);
+                                                    return (
+                                                        <Table.Row key={index}>
+                                                            <Table.Cell>{index + 1}</Table.Cell>
+                                                            <Table.Cell>
+                                                                {product ? product.title : 'Không có sản phẩm'}
+                                                            </Table.Cell>
+                                                            <Table.Cell>{item.quantity ?? 0}</Table.Cell>
+                                                            <Table.Cell>
+                                                                {item.price
+                                                                    ? item.price.toLocaleString() + ' đ'
+                                                                    : 'N/A'}
+                                                            </Table.Cell>
+                                                            <Table.Cell>
+                                                                {item.price && item.quantity
+                                                                    ? (item.price * item.quantity).toLocaleString() +
+                                                                      ' đ'
+                                                                    : 'N/A'}
+                                                            </Table.Cell>
+                                                        </Table.Row>
+                                                    );
+                                                })}
+                                            </Table.Body>
+                                            <Table.Footer>
+                                                <Table.Row>
+                                                    <Table.Cell
+                                                        colSpan={4}
+                                                        style={{ textAlign: 'right', fontWeight: 'bold' }}
+                                                    >
+                                                        Tổng cộng
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        {order.total ? order.total.toLocaleString() + ' đ' : 'N/A'}
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                            </Table.Footer>
+                                        </Table.Root>
+                                    </Box>
                                 </Box>
                             ))}
                         </Stack>

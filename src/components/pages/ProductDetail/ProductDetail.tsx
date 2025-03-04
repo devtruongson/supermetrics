@@ -5,7 +5,7 @@ import { useColorMode } from '@/components/ui/color-mode';
 import { getAllCateService, getAllPoductCateService } from '@/services/cate';
 import { useAppStore } from '@/stores/appStore';
 import { Document } from '@/utils/interface';
-import { Box, Button, Container, Flex, Heading, HStack, Image, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import Cate from '../Cate/Cate';
@@ -90,11 +90,19 @@ export default function ProductDetail({ data }: { data: Document }) {
         <Box px={[4, 8]} bg={colorMode === 'dark' ? '#000' : '#fff'} pt={'120px'}>
             {data && (
                 <Container maxW="container.xl">
-                    <HStack w={'100%'} gap={'40px'} alignItems={'self-start'}>
-                        <Box w={'50%'}>
+                    <Stack direction={['column', 'row']} w="100%" gap="40px" alignItems="flex-start">
+                        <Box w={['100%', '50%']}>
                             <Slider {...settings}>
-                                <Box borderRadius={'10px'} overflow={'hidden'}>
+                                <Box
+                                    borderRadius="10px"
+                                    overflow="hidden"
+                                    className="h-300"
+                                    lg={{
+                                        height: '574px',
+                                    }}
+                                >
                                     <iframe
+                                        className="h-300"
                                         width="100%"
                                         height="574px"
                                         src={`https://www.youtube.com/embed/${data.google_sheet_demo}`}
@@ -105,14 +113,19 @@ export default function ProductDetail({ data }: { data: Document }) {
                                     ></iframe>
                                 </Box>
                                 {data.images.map((img, index) => (
-                                    <Box w={'100%'} key={index}>
+                                    <Box w="100%" key={index}>
                                         <Image
-                                            w={'100%'}
-                                            height={'574px'}
-                                            objectFit={'cover'}
-                                            border={'1px solid #ccc'}
-                                            borderRadius={'6px'}
-                                            alt="Hinh anh"
+                                            sm={{
+                                                height: '300px',
+                                            }}
+                                            lg={{
+                                                height: '574px',
+                                            }}
+                                            w="100%"
+                                            objectFit="cover"
+                                            border="1px solid #ccc"
+                                            borderRadius="6px"
+                                            alt="Hình ảnh"
                                             src={img?.image_url?.replace(
                                                 'http://127.0.0.1:9002',
                                                 process.env.NEXT_PUBLIC_URL_BE as string,
@@ -122,8 +135,8 @@ export default function ProductDetail({ data }: { data: Document }) {
                                 ))}
                             </Slider>
                         </Box>
-                        <Box>
-                            <Heading as="h1" fontWeight={'500'} size="4xl" mb={4}>
+                        <Box w={['100%', '50%']}>
+                            <Heading as="h1" fontWeight="500" size="4xl" mb={4} className="text-20">
                                 {data.title}
                             </Heading>
                             <Flex align="center" gap={3} mb={4}>
@@ -137,8 +150,9 @@ export default function ProductDetail({ data }: { data: Document }) {
                             <Button
                                 colorScheme="blue"
                                 size="2xl"
-                                borderRadius={'20px'}
-                                mb={'20px'}
+                                borderRadius="20px"
+                                w={'full'}
+                                mb="20px"
                                 onClick={() => {
                                     handleAddToCart(data);
                                     handleToggleOpenCart();
@@ -151,12 +165,14 @@ export default function ProductDetail({ data }: { data: Document }) {
                                 <MarkDown text={data.description} />
                             </Stack>
                         </Box>
-                    </HStack>
+                    </Stack>
                 </Container>
             )}
             {productList &&
                 productList.length > 0 &&
-                productList.map((item, index) => <Cate padding='30px' isShowEmpty={true} data={item.data} key={index} />)}
+                productList.map((item, index) => (
+                    <Cate padding="30px" isShowEmpty={true} data={item.data} key={index} />
+                ))}
         </Box>
     );
 }

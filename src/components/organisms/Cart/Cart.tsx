@@ -74,17 +74,17 @@ export default function Cart() {
                     </Badge>
                 )}
             </Box>
-            <DrawerRoot size={'md'} open={cart_open} onOpenChange={() => handleToggleOpenCart(false)}>
+            <DrawerRoot size="md" open={cart_open} onOpenChange={() => handleToggleOpenCart(false)}>
                 <DrawerBackdrop />
-                <DrawerContent width={'60vw'} position="fixed" h="100vh" top={0} right={0}>
+                <DrawerContent width={{ base: '100vw', md: '60vw' }} position="fixed" h="100vh" top={0} right={0}>
                     <DrawerHeader>
                         <DrawerTitle>
                             Giỏ hàng
                             <Button
-                                bg={'transparent'}
-                                position={'absolute'}
-                                right={'10px'}
-                                top={'10px'}
+                                bg="transparent"
+                                position="absolute"
+                                right="10px"
+                                top="10px"
                                 onClick={() => {
                                     handleToggleOpenCart();
                                 }}
@@ -97,15 +97,14 @@ export default function Cart() {
                     </DrawerHeader>
                     <DrawerBody>
                         <Box
-                            py={'20px'}
-                            px={'30px'}
-                            position={'relative'}
-                            display={'flex'}
-                            flexDirection={'column'}
-                            justifyContent={'space-between'}
-                            height={'100%'}
+                            py="20px"
+                            px="30px"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="space-between"
+                            height="100%"
                         >
-                            <VStack flex={1} align="stretch" overflow={'auto'}>
+                            <VStack flex={1} align="stretch" overflow="auto">
                                 {cart.length > 0 ? (
                                     cart.map((item, index) => <CartItem itemCart={item} key={index} />)
                                 ) : (
@@ -125,7 +124,7 @@ export default function Cart() {
                                 )}
                             </VStack>
                             <Box>
-                                <Box py={'10px'}>
+                                <Box py="10px">
                                     <hr />
                                 </Box>
                                 <Flex justify="space-between" align="center">

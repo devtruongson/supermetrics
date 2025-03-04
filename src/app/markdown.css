@@ -4920,6 +4920,5 @@
 
 .preview-markdown ol,
 ul {
-    list-style  : auto;
-    padding-left: 40px;
+    list-style: auto;
 }
