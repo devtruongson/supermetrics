@@ -123,8 +123,14 @@ const MenuMobile = () => {
         <DrawerRoot size={'xl'}>
             <DrawerBackdrop />
             <DrawerTrigger asChild>
-                <Button variant="outline" size="sm" bg={colorMode === 'dark' ? '#fff' : 'transparent'}>
-                    <Image src="/hamburger.png" w={'30px'} h={'30px'} alt="Hinh Anh" />
+                <Button
+                    width={'24px'}
+                    height={'24px'}
+                    variant="outline"
+                    size="sm"
+                    bg={colorMode === 'dark' ? '#fff' : 'transparent'}
+                >
+                    <Image src="/hamburger.png" w={'20px'} h={'20px'} alt="Hinh Anh" />
                 </Button>
             </DrawerTrigger>
             <DrawerContent position={'fixed'} left={0} top={0} bottom={0} height={'100vh'}>
