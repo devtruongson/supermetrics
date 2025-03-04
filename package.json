@@ -9,7 +9,9 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@chakra-ui/form-control": "^2.2.0",
         "@chakra-ui/icons": "^2.2.4",
+        "@chakra-ui/layout": "^2.3.1",
         "@chakra-ui/react": "^3.8.0",
         "@chakra-ui/react-use-outside-click": "^2.2.0",
         "@chakra-ui/transition": "^2.1.0",
@@ -22,8 +24,11 @@
         "react-dom": "^19.0.0",
         "react-icons": "^5.5.0",
         "react-intersection-observer": "^9.15.1",
+        "react-markdown": "^10.0.1",
         "react-slick": "^0.30.3",
+        "rehype-raw": "^7.0.0",
         "slick-carousel": "^1.8.1",
+        "sweetalert2": "^11.17.2",
         "zustand": "^5.0.3"
     },
     "devDependencies": {

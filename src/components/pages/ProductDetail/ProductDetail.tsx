@@ -1,11 +1,14 @@
 'use client';
 
-import ProductList from '@/components/organisms/ProductList/ProductList';
+import MarkDown from '@/components/atoms/MarkDown/MarkDown';
 import { useColorMode } from '@/components/ui/color-mode';
+import { getAllCateService, getAllPoductCateService } from '@/services/cate';
 import { useAppStore } from '@/stores/appStore';
 import { Document } from '@/utils/interface';
 import { Box, Button, Container, Flex, Heading, HStack, Image, Stack, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import Cate from '../Cate/Cate';
 
 export default function ProductDetail({ data }: { data: Document }) {
     const settings = {
@@ -50,6 +53,40 @@ export default function ProductDetail({ data }: { data: Document }) {
 
     const { colorMode } = useColorMode();
     const { handleAddToCart, handleToggleOpenCart } = useAppStore();
+    const [productList, setProductList] = useState<
+        | {
+              title: string;
+              data: Document[];
+          }[]
+    >([]);
+
+    console.log(data);
+
+    useEffect(() => {
+        if (!data) return;
+
+        const _fetch = async () => {
+            try {
+                const dataCate = await getAllCateService();
+                dataCate?.data?.map(async (cate) => {
+                    if (parseInt(cate.id) !== data.category_id) {
+                        const res = await getAllPoductCateService(parseInt(cate.id));
+                        if (res.success) {
+                            const dataBuilder = {
+                                title: res?.data[0]?.category_name ? res?.data[0].category_name : 'Đang cập nhật',
+                                data: res.data,
+                            };
+                            setProductList((prev) => [...prev, dataBuilder]);
+                        }
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        _fetch();
+    }, [data]);
 
     return (
         <Box px={[4, 8]} bg={colorMode === 'dark' ? '#000' : '#fff'} pt={'120px'}>
@@ -89,14 +126,14 @@ export default function ProductDetail({ data }: { data: Document }) {
                         </Box>
                         <Box>
                             <Heading as="h1" fontWeight={'500'} size="4xl" mb={4}>
-                                HỌC TỪ VỰNG & MỌI THỨ PHƯƠNG PHÁP HỌC LẶP LẠI NGẮT QUÃNG (SPACED REPETITION):
+                                {data.title}
                             </Heading>
                             <Flex align="center" gap={3} mb={4}>
                                 <Text as="span" color="gray.500" textDecoration="line-through" fontSize="md">
-                                    200.000 đ
+                                    {(data.price / 0.8).toLocaleString()} đ
                                 </Text>
                                 <Text as="span" color="red.500" fontWeight="bold" fontSize="xl">
-                                    65.000 đ
+                                    {data.price.toLocaleString()} đ
                                 </Text>
                             </Flex>
                             <Button
@@ -113,13 +150,15 @@ export default function ProductDetail({ data }: { data: Document }) {
                             </Button>
 
                             <Stack fontSize="sm">
-                                <Text whiteSpace={'pre-line'}>{data.description}</Text>
+                                <MarkDown text={data.description} />
                             </Stack>
                         </Box>
                     </HStack>
                 </Container>
             )}
-            <ProductList />
+            {productList &&
+                productList.length > 0 &&
+                productList.map((item, index) => <Cate isShowEmpty={true} data={item.data} key={index} />)}
         </Box>
     );
 }

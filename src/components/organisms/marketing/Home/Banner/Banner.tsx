@@ -10,7 +10,7 @@ export default function Banner() {
     const { colorMode } = useColorMode();
 
     return (
-        <Box pt={'80px'}>
+        <Box pt={'94px'}>
             <Button
                 bg={colorMode === 'dark' ? '#222' : '#111'}
                 color={'#fff'}

@@ -14,7 +14,7 @@ export interface IAppState {
     handleRemoveProduct: (documentId: number) => void;
     handleIncrement: (documentId: number) => void;
     handleDecrement: (documentId: number) => void;
-    handleToggleOpenCart: () => void;
+    handleToggleOpenCart: (status?: boolean) => void;
 }
 
 export interface IUser {

@@ -3,8 +3,7 @@
 import Cate from '@/components/atoms/Cate/Cate';
 import { useColorMode } from '@/components/ui/color-mode';
 import { Tooltip } from '@/components/ui/tooltip';
-import { Box, Container, Flex, Icon, Spacer, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Box, Container, Flex, Heading, Icon, Image, Link, List, Spacer, Text } from '@chakra-ui/react';
 import { CiLight } from 'react-icons/ci';
 import { MdDarkMode } from 'react-icons/md';
 import Cart from '../Cart/Cart';
@@ -12,28 +11,10 @@ import Search from '../Search/Search';
 
 const Header = () => {
     const { colorMode, toggleColorMode } = useColorMode();
-    const [isTransparent, setIsTransparent] = useState<boolean>(true);
-
-    useEffect(() => {
-        if (window.scrollY > 50) {
-            setIsTransparent(false);
-        } else {
-            setIsTransparent(true);
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                setIsTransparent(false);
-            } else {
-                setIsTransparent(true);
-            }
-        });
-
-        return () => window.removeEventListener('scroll', () => {});
-    }, []);
 
     return (
         <Box
+            height={'94px'}
             as="header"
             position={'fixed'}
             top={0}
@@ -42,27 +23,43 @@ const Header = () => {
             zIndex={998}
             py={4}
             px={8}
-            boxShadow={isTransparent ? 'inherit' : 'sm'}
-            bg={isTransparent ? 'transparent' : colorMode === 'dark' ? '#000' : '#fff'}
+            boxShadow={'0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);'}
+            bg={colorMode === 'dark' ? '#000' : '#fff'}
         >
             <Container>
                 <Flex align="center" mx="auto">
                     <Flex as="nav" align="center" gap={6} display={{ base: 'none', md: 'flex' }} alignItems={'center'}>
-                        <Text
-                            fontSize="xl"
-                            fontWeight="bold"
-                            color="blue.600"
-                            onClick={() => (window.location.href = '/')}
-                            cursor={'pointer'}
-                        >
-                            Template 2T Data
-                        </Text>
+                        <Flex gap={2} cursor={'pointer'} onClick={() => (window.location.href = '/')}>
+                            <Image
+                                w={'60px'}
+                                height={'60px'}
+                                borderRadius={6}
+                                src="/marketing/logo.png"
+                                alt="Logo website"
+                            />
+                            <Box>
+                                <Heading>2T Data</Heading>
+                                <Text color={'#6ec1e4'} fontWeight={'600'} fontStyle={'italic'}>
+                                    Fast Secure Effective
+                                </Text>
+                            </Box>
+                        </Flex>
                         <Cate />
+                        <List.Root display="flex" flexDirection="row" listStyle="none" gap={4}>
+                            <List.Item fontSize="sm" fontWeight={600}>
+                                <Link href="https://khoinghiepkinhdoanh.info/">Khởi nghiệp kinh doanh</Link>
+                            </List.Item>
+                            <List.Item fontSize="sm" fontWeight={600}>
+                                <Link href="https://hcw.com.vn/services/">Hướng dẫn kiến thức</Link>
+                            </List.Item>
+                            <List.Item fontSize="sm" fontWeight={600}>
+                                <Link href="https://www.hcwvn.com/">Liên hệ</Link>
+                            </List.Item>
+                        </List.Root>
                     </Flex>
 
                     <Spacer />
 
-                    {/* Action Buttons */}
                     <Flex align="center" gap={4}>
                         <Search />
                         <Cart />

@@ -26,7 +26,7 @@ export default function Cate() {
             <MenuRoot>
                 <MenuTrigger asChild>
                     <Text fontSize="sm" fontWeight="600" cursor={'pointer'}>
-                        Danh mục
+                        Danh mục tài liệu
                     </Text>
                 </MenuTrigger>
                 <MenuContent bg={colorMode === 'dark' ? '#111' : '#fff'} position={'absolute'}>
@@ -49,7 +49,7 @@ export default function Cate() {
                                 display={'block'}
                                 whiteSpace={'nowrap'}
                                 outline={'none'}
-                                href={`/danh-muc/${cate.id}`}
+                                href={`/cate/${cate.id}`}
                             >
                                 {cate.name}
                             </Link>

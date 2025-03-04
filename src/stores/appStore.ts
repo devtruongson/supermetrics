@@ -97,11 +97,11 @@ export const useAppStore = create<IAppState>()(
                     }
                 });
             },
-            handleToggleOpenCart() {
+            handleToggleOpenCart(status) {
                 set((state) => {
                     return {
                         ...state,
-                        cart_open: !state.cart_open,
+                        cart_open: status ? status : !state.cart_open,
                     };
                 });
             },

@@ -36,3 +36,33 @@ export const CloseIcon = () => (
         <path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z" />
     </svg>
 );
+
+export const IncreIcon = () => (
+    <svg
+        style={{
+            width: 10,
+        }}
+        enableBackground="new 0 0 10 10"
+        viewBox="0 0 10 10"
+        x="0"
+        y="0"
+        className="shopee-svg-icon icon-plus-sign"
+    >
+        <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
+    </svg>
+);
+
+export const DesIcon = () => (
+    <svg
+        style={{
+            width: 10,
+        }}
+        enableBackground="new 0 0 10 10"
+        viewBox="0 0 10 10"
+        x="0"
+        y="0"
+        className="shopee-svg-icon"
+    >
+        <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
+    </svg>
+);
