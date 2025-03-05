@@ -173,85 +173,87 @@ function OrderItem({ order }: { order: Order }) {
                         })}
                     </Text>
                 </Box>
-                <Stack
-                    direction={['column', 'row']}
-                    py={'6px'}
-                    sm={{
-                        width: '100%',
-                    }}
-                    md={{
-                        width: '50%',
-                    }}
-                    position={'relative'}
-                >
-                    {order.status !== 'pending' && (
-                        <Text
-                            position={'absolute'}
-                            zIndex={10}
-                            left={'50%'}
-                            top={'50%'}
-                            style={{
-                                transform: 'translateX(-50%)',
-                            }}
-                            filter="none"
-                            bg={'#ee4d2d'}
-                            px={6}
-                            py={3}
-                            borderRadius={4}
-                            fontWeight={600}
-                            color={'#fff'}
-                            fontSize={'md'}
-                        >
-                            Đơn hàng đã thanh toán
-                        </Text>
-                    )}
-                    {qr && (
-                        <Image
+                {order.payment_method === 'BANKING' && (
+                    <Stack
+                        direction={['column', 'row']}
+                        py={'6px'}
+                        sm={{
+                            width: '100%',
+                        }}
+                        md={{
+                            width: '50%',
+                        }}
+                        position={'relative'}
+                    >
+                        {order.status !== 'pending' && (
+                            <Text
+                                position={'absolute'}
+                                zIndex={10}
+                                left={'50%'}
+                                top={'50%'}
+                                style={{
+                                    transform: 'translateX(-50%)',
+                                }}
+                                filter="none"
+                                bg={'#ee4d2d'}
+                                px={6}
+                                py={3}
+                                borderRadius={4}
+                                fontWeight={600}
+                                color={'#fff'}
+                                fontSize={'md'}
+                            >
+                                Đơn hàng đã thanh toán
+                            </Text>
+                        )}
+                        {qr && (
+                            <Image
+                                filter={order.status === 'pending' ? 'none' : 'auto'}
+                                blur={order.status === 'pending' ? '0' : '5px'}
+                                className="full-sm"
+                                src={qr}
+                                alt="Hình ảnh chuyển khoản"
+                                w={'200px'}
+                                height={'200px'}
+                                objectFit={'contain'}
+                            />
+                        )}
+                        <Box
+                            py={'10px'}
                             filter={order.status === 'pending' ? 'none' : 'auto'}
                             blur={order.status === 'pending' ? '0' : '5px'}
-                            className="full-sm"
-                            src={qr}
-                            alt="Hình ảnh chuyển khoản"
-                            w={'200px'}
-                            height={'200px'}
-                            objectFit={'contain'}
-                        />
-                    )}
-                    <Box
-                        py={'10px'}
-                        filter={order.status === 'pending' ? 'none' : 'auto'}
-                        blur={order.status === 'pending' ? '0' : '5px'}
-                    >
-                        <Text fontWeight={600}>Đơn hàng của bạn chưa thanh toán</Text>
-                        <List.Root gap="1" variant="plain" mt={'10px'}>
-                            <List.Item>
-                                <List.Indicator asChild color="green.500">
-                                    <LuCircleCheck />
-                                </List.Indicator>
-                                CONG TY TNHH 2TData VIET NAM
-                            </List.Item>
-                            <List.Item>
-                                <List.Indicator asChild color="green.500">
-                                    <LuCircleCheck />
-                                </List.Indicator>
-                                {order.total.toLocaleString()} đ
-                            </List.Item>
-                            <List.Item>
-                                <List.Indicator asChild color="green.500">
-                                    <LuCircleCheck />
-                                </List.Indicator>
-                                Nội dung: Thanh toán tiền mua template SDT + TEN
-                            </List.Item>
-                            <List.Item>
-                                <List.Indicator asChild color="green.500">
-                                    <LuCircleCheck />
-                                </List.Indicator>
-                                Hệ thống sẽ gửi mã kích hoạt & hướng dẫn tải tài liệu qua email bạn đã đăng ký sau 5-10
-                                phút sau khi hoàn tất thanh toán (Chuyển khoản hoặc Momo)
-                            </List.Item>
-                        </List.Root>
-                    </Box>
-                </Stack>
+                        >
+                            <Text fontWeight={600}>Đơn hàng của bạn chưa thanh toán</Text>
+                            <List.Root gap="1" variant="plain" mt={'10px'}>
+                                <List.Item>
+                                    <List.Indicator asChild color="green.500">
+                                        <LuCircleCheck />
+                                    </List.Indicator>
+                                    CONG TY TNHH 2TData VIET NAM
+                                </List.Item>
+                                <List.Item>
+                                    <List.Indicator asChild color="green.500">
+                                        <LuCircleCheck />
+                                    </List.Indicator>
+                                    {order.total.toLocaleString()} đ
+                                </List.Item>
+                                <List.Item>
+                                    <List.Indicator asChild color="green.500">
+                                        <LuCircleCheck />
+                                    </List.Indicator>
+                                    Nội dung: Thanh toán tiền mua template SDT + TEN
+                                </List.Item>
+                                <List.Item>
+                                    <List.Indicator asChild color="green.500">
+                                        <LuCircleCheck />
+                                    </List.Indicator>
+                                    Hệ thống sẽ gửi mã kích hoạt & hướng dẫn tải tài liệu qua email bạn đã đăng ký sau
+                                    5-10 phút sau khi hoàn tất thanh toán (Chuyển khoản hoặc Momo)
+                                </List.Item>
+                            </List.Root>
+                        </Box>
+                    </Stack>
+                )}
             </Stack>
 
             <Separator my={4} />
