@@ -18,13 +18,11 @@ import {
     DrawerTitle,
     DrawerTrigger,
     Flex,
-    Heading,
     Icon,
     Image,
     Link,
     List,
     Spacer,
-    Text,
 } from '@chakra-ui/react';
 import { CiLight } from 'react-icons/ci';
 import { MdDarkMode } from 'react-icons/md';
@@ -60,24 +58,12 @@ const Header = () => {
                             onClick={() => (window.location.href = '/')}
                             className="sm-hidden"
                         >
-                            <Image
-                                w={'60px'}
-                                height={'60px'}
-                                borderRadius={6}
-                                src="/marketing/logo.png"
-                                alt="Logo website"
-                            />
-                            <Box>
-                                <Heading>2T Data</Heading>
-                                <Text color={'#6ec1e4'} fontWeight={'600'} fontStyle={'italic'}>
-                                    Fast Secure Effective
-                                </Text>
-                            </Box>
+                            <Image height={'60px'} borderRadius={6} src="/marketing/logo.png" alt="Logo website" />
                         </Flex>
                         <Cate />
                         <List.Root display="flex" flexDirection="row" listStyle="none" gap={4} padding={0}>
                             <List.Item fontSize="sm" fontWeight={600}>
-                                <Link href="/order/enter_your_phone">Tra cứu đơn hàng</Link>
+                                <Link href="/order/enter_your_phone_unix">Tra cứu đơn hàng</Link>
                             </List.Item>
                             <List.Item fontSize="sm" fontWeight={600}>
                                 <Link href="https://khoinghiepkinhdoanh.info/">Khởi nghiệp kinh doanh</Link>
@@ -137,19 +123,7 @@ const MenuMobile = () => {
                 <DrawerHeader>
                     <DrawerTitle>
                         <Flex gap={2} cursor={'pointer'} onClick={() => (window.location.href = '/')}>
-                            <Image
-                                w={'60px'}
-                                height={'60px'}
-                                borderRadius={6}
-                                src="/marketing/logo.png"
-                                alt="Logo website"
-                            />
-                            <Box>
-                                <Heading>2T Data</Heading>
-                                <Text color={'#6ec1e4'} fontWeight={'600'} fontStyle={'italic'}>
-                                    Fast Secure Effective
-                                </Text>
-                            </Box>
+                            <Image height={'60px'} borderRadius={6} src="/marketing/logo.png" alt="Logo website" />
                         </Flex>
                     </DrawerTitle>
                 </DrawerHeader>
@@ -158,7 +132,7 @@ const MenuMobile = () => {
                         <Cate is_mobile />
                         <List.Root listStyle="none" gap={4} padding={0}>
                             <List.Item fontSize="sm" fontWeight={600}>
-                                <Link href="/order/enter_your_phone">Tra cứu đơn hàng</Link>
+                                <Link href="/order/enter_your_phone_unix">Tra cứu đơn hàng</Link>
                             </List.Item>
                             <List.Item fontSize="sm" fontWeight={600}>
                                 <Link href="https://khoinghiepkinhdoanh.info/">Khởi nghiệp kinh doanh</Link>

@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, HStack, Icon, Image, Link, Separator, Stack } from '@chakra-ui/react';
+import { Box, Container, Flex, HStack, Icon, Image, Link, Separator, Stack } from '@chakra-ui/react';
 import { SiGithub, SiLinkedin, SiX } from 'react-icons/si';
 
 export default function Footer() {
@@ -8,20 +8,8 @@ export default function Footer() {
             <Container as="footer" py={{ base: '10', md: '12' }}>
                 <Stack gap="6">
                     <Stack direction="row" justify="space-between" align="center">
-                        <Flex gap={2} cursor={'pointer'} onClick={() => (window.location.href = '/')}>
-                            <Image
-                                w={'60px'}
-                                height={'60px'}
-                                borderRadius={6}
-                                src="/marketing/logo.png"
-                                alt="Logo website"
-                            />
-                            <Box>
-                                <Heading>2T Data</Heading>
-                                <Text color={'#6ec1e4'} fontWeight={'600'} fontStyle={'italic'}>
-                                    Fast Secure Effective
-                                </Text>
-                            </Box>
+                        <Flex cursor={'pointer'} onClick={() => (window.location.href = '/')}>
+                            <Image height={'60px'} borderRadius={6} src="/marketing/logo.png" alt="Logo website" />
                         </Flex>
                         <HStack gap="4">
                             {socialLinks.map(({ href, icon }, index) => (

@@ -41,10 +41,9 @@ const typeCheckOut = createListCollection({
 
 const timeReceive = createListCollection({
     items: [
-        { label: 'Buổi sáng', value: 'morning' },
-        { label: 'Buổi trưa', value: 'noon' },
-        { label: 'Buổi chiều', value: 'affternoon' },
-        { label: 'Buổi tối', value: 'night' },
+        { label: 'Sáng từ 6h đến 12h', value: 'Sáng từ 6h đến 12h' },
+        { label: 'Chiều 12h đến 18h', value: 'Chiều 12h đến 18h' },
+        { label: 'Tối 18h đến 24h', value: 'Tối 18h đến 24h' },
     ],
 });
 
@@ -74,7 +73,6 @@ export default function CheckoutPage() {
                     accountName: 'CONG TY TNHH HCW VIET NAM',
                     acqId: '970416',
                     amount: getTotalPrice(cart),
-                    addInfo: 'Thanh toán template',
                     template: 'compact',
                 }),
             });
@@ -155,15 +153,16 @@ export default function CheckoutPage() {
             customer_name: formData.customerName.trim(),
             customer_email: formData.customerEmail.trim(),
             customer_phone: formData.customerPhone.trim(),
-            ...(formData.deliveryMethod === 'COD' && {
+            ...(typeCheckoutSelect === 'COD' && {
                 address: formData.address.trim(),
                 delivery_time: formData.deliveryTime,
             }),
-            delivery_method: formData.deliveryMethod,
-            payment_method: formData.deliveryMethod === 'EMAIL' ? 'BANKING' : 'COD',
+            delivery_method: typeCheckoutSelect,
+            payment_method: typeCheckoutSelect,
             total_amount: getTotalPrice(cart),
             status: 'pending',
         };
+
         try {
             const response = await createOrder(orderData);
             console.log(response);
@@ -172,9 +171,10 @@ export default function CheckoutPage() {
                 Swal.fire({
                     text: 'Chúc mừng bạn đã đặt hàng thành công!',
                     icon: 'success',
+                }).then(() => {
+                    handleClearCart();
+                    window.location.href = `/order/${formData.customerPhone}`;
                 });
-                handleClearCart();
-                window.location.href = `/order/${formData.customerPhone}`;
             } else {
                 Swal.fire({
                     text: 'Có lỗi khi tạo đơn hàng',
@@ -353,7 +353,7 @@ export default function CheckoutPage() {
                                             <List.Indicator asChild color="green.500">
                                                 <LuCircleCheck />
                                             </List.Indicator>
-                                            Nội dung: Thanh toán tiền mua template 2TData
+                                            Nội dung: Thanh toán tiền mua template SDT + TEN
                                         </List.Item>
                                         <List.Item>
                                             <List.Indicator asChild color="green.500">
@@ -441,8 +441,7 @@ export default function CheckoutPage() {
                                                 >
                                                     {getTotalPrice(cart).toLocaleString()} vnđ
                                                 </strong>
-                                                ) + 20k ship. Sau đó thực hiện kích hoạt khóa học theo như hướng dẫn
-                                                trên thư.
+                                                ). Sau đó thực hiện kích hoạt khóa học theo như hướng dẫn trên thư.
                                             </Text>
                                         </List.Item>
                                     </List.Root>
